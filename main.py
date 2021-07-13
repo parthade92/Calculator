@@ -35,10 +35,18 @@ def div(num1, num2):
     return num1/num2
 
 
+operations = {
+    "+": add,
+    "-": sub,
+    "*": mul,
+    "/": div
+}
+
 flag = 'n'
 while flag == 'n':
     total = 0
     n1 = float(input("What's the first number: "))
+    n2 = float(input("What's the second number: "))
     print('''
     +
     -
@@ -46,37 +54,20 @@ while flag == 'n':
     /
     ''')
     op = input("Pick an operation: ")
-    n2 = float(input("What's the second number: "))
-    if op == "+":
-        total = add(n1, n2)
-    elif op == "-":
-        total = sub(n1, n2)
-    elif op == "*":
-        total = mul(n1, n2)
-    elif op == "/":
-        total = div(n1, n2)
-    else:
-        print("Invalid Input")
+    calc = operations[op]
+    total = calc(n1, n2)
     print(f"{n1} {op} {n2} = {total}")
     flag = input(f"Type 'y' to continue with {total}, or type 'n' to start a new calculation or 'e' to exit:\n").lower()
     if flag == 'e':
         exit(0)
     while flag == 'y':
         t = total
-        op = input("Pick an operation: ")
         n = float(input("What's the number: "))
-        if op == "+":
-            total = add(total, n)
-        elif op == "-":
-            total = sub(total, n)
-        elif op == "*":
-            total = mul(total, n)
-        elif op == "/":
-            total = div(total, n)
-        else:
-            print("Invalid Input")
-        print(f"{t} {op} {n} = {total}")
+        op = input("Pick an operation: ")
+        calc = operations[op]
+        total1 = calc(total, n)
+        print(f"{t} {op} {n} = {total1}")
         flag = input(
-            f"Type 'y' to continue with {total}, or type 'n' to start a new calculation or 'e' to exit:\n").lower()
+            f"Type 'y' to continue with {total1}, or type 'n' to start a new calculation or 'e' to exit:\n").lower()
         if flag == 'e':
             exit(0)
